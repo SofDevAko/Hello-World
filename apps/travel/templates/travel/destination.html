@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Akin's Travel Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    {% if request.session.active_username %}
+        <p>You are logged in as {{request.session.active_name}}</p>
+        <a href="/logout">Click to logout</a>    
+    {% endif %}
+    <a href="/travels">See all travels</a>
+    <h2>{{travel.destination}}</h2>
+    Planned by: {{ travel.created_by }}<br>
+    Description: {{ travel.description }}<br>
+    Travel Date From: {{ travel.datestart }}<br>
+    Travel Date To: {{ travel.dateend }} <br>
+
+    <h3>Other Users joining this trip:</h3>
+
+    {% for user in otherusers %}
+        <ul>
+            <li>{{ user.name }}</li>
+        </ul>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Akin's Travel Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    {% if request.session.active_username %}
+        <p>You are logged in as {{request.session.active_name}}</p>
+        <a href="/logout">Click to logout</a>    
+    {% endif %}
+    <a href="/travels">See all travels</a>
+    <h2>Add a Travel</h2>
+    <form action="addtravel", method="POST">
+            {% csrf_token %}
+            Destination: <input type="text" name="destination"><br>
+            Description: <input type="text" name="description"><br>
+            Travel Date From: <input type="date" name="datestart">  <br>
+            Travel Date To: <input type="date" name="dateend">  <br>
+            
+            <input type="submit" value="Add Travel">
+        </form>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
